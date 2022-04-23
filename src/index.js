@@ -59,6 +59,15 @@ function displayWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 }
-let apiKey = "997f30ea63c7989ff9ae71ea98d23fea";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Sydney&appid=${apiKey}&units=metric`;
-axios.get(apiUrl).then(displayWeather);
+function search(city) {
+  let apiKey = "997f30ea63c7989ff9ae71ea98d23fea";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayWeather);
+}
+function submitForm(event) {
+  event.preventDefault();
+  let submitCity = document.querySelector("#search-city");
+  search(submitCity.value);
+}
+let searchEngine = document.querySelector("#search-engine");
+searchEngine.addEventListener("submit", submitForm);
