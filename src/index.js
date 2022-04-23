@@ -37,3 +37,23 @@ function currentDate() {
   currentTime.innerHTML = `${hours}:${minutes}`;
 }
 currentDate();
+
+function displayWeather(response) {
+  let city = document.querySelector("#city");
+  city.innerHTML = response.data.name;
+  let weatherDescription = document.querySelector("#weather-description");
+  weatherDescription.innerHTML = response.data.weather[0].main;
+  let currentTemperature = document.querySelector("#current-temperature");
+  currentTemperature.innerHTML = Math.round(response.data.main.temp);
+  let temperatureMaximum = document.querySelector("#temperature-max");
+  temperatureMaximum.innerHTML = Math.round(response.data.main.temp_max);
+  let temperatureMinimum = document.querySelector("#temperature-min");
+  temperatureMinimum.innerHTML = Math.round(response.data.main.temp_min);
+  let humidity = document.querySelector("#humidity");
+  humidity.innerHTML = response.data.main.humidity;
+  let wind = document.querySelector("#wind");
+  wind.innerHTML = Math.round(response.data.wind.speed);
+}
+let apiKey = "997f30ea63c7989ff9ae71ea98d23fea";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Sydney&appid=${apiKey}&units=metric`;
+axios.get(apiUrl).then(displayWeather);

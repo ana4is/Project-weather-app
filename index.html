@@ -29,26 +29,35 @@
   <body>
     <div class="container">
       <div class="content">
-        <h1>Sevilla</h1>
-        <h2 id="current-date">Thursday, April 21</h2>
+        <h1 id="city"></h1>
+        <h2 id="date">
+          <span id="current-date"> Thursday, April 21</span
+          ><span class="current-time" id="current-time">20:00</span>
+        </h2>
         <div class="row">
           <div class="col-6">
             <ul>
-              <li class="current-time" id="current-time">20:00</li>
+              <li class="weather-description" id="weather-description">
+                sunny
+              </li>
               <li>
                 <i class="fa-solid fa-sun fa-4x"></i
                 ><span class="current-temperature" id="current-temperature">
-                  22°</span
-                ><span class="units" id="units-input"> C|F </span>
+                  22</span
+                >°<span class="units" id="units-input"> C|F </span>
               </li>
             </ul>
           </div>
           <div class="col-6">
-            <ul class="description-weather">
-              <li>Temperature : 20</li>
-              <li>Precipitations : 12%</li>
-              <li>Humidity : 30%</li>
-              <li>Wind : 13</li>
+            <ul class="weather">
+              <li>
+                Temperature maximum: <span id="temperature-max">20</span>°
+              </li>
+              <li>
+                Temperature minimum : <span id="temperature-min">12</span>°
+              </li>
+              <li>Humidity : <span id="humidity">30</span>%</li>
+              <li>Wind : <span id="wind">13</span>km/h</li>
             </ul>
           </div>
         </div>
