@@ -1,1 +1,50 @@
+.container {
+  font-family: Kalam;
+  max-width: 100%;
+}
+.content {
+  max-width: 100%;
+  margin: 30px auto;
+  border: 3px solid blue;
+  border-radius: 100px;
+}
+h1 {
+  text-align: center;
+  font-weight: 700;
+  font-size: 50px;
+  margin-top: 40px;
+}
+h2 {
+  text-align: center;
+  font-weight: 400;
+  font-size: 30px;
+  margin-bottom: 40px;
+}
+ul {
+  list-style: none;
+}
+.first-column li{
+  margin-left: 20px;
+}
+.current-time {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 20px;
+  margin-left: 15px;
+}
+.current-temperature {
+  font-weight: 400;
+  font-size: 25px;
+}
+.units {
+  font-weight: 400;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.description-weather {
+  line-height: 2em;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 40px;
+}
 
