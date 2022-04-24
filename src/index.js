@@ -44,7 +44,8 @@ function displayWeather(response) {
   let weatherDescription = document.querySelector("#weather-description");
   weatherDescription.innerHTML = response.data.weather[0].main;
   let currentTemperature = document.querySelector("#current-temperature");
-  currentTemperature.innerHTML = Math.round(response.data.main.temp);
+  celsiusTemp = response.data.main.temp;
+  currentTemperature.innerHTML = Math.round(celsiusTemp);
   let temperatureMaximum = document.querySelector("#temperature-max");
   temperatureMaximum.innerHTML = Math.round(response.data.main.temp_max);
   let temperatureMinimum = document.querySelector("#temperature-min");
@@ -69,5 +70,31 @@ function submitForm(event) {
   let submitCity = document.querySelector("#search-city");
   search(submitCity.value);
 }
+
+function showTempFahrenheit(event) {
+  event.preventDefault();
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  let currentTemperature = document.querySelector("#current-temperature");
+  let fahrenheitTemperature = (celsiusTemp * 9) / 5 + 32;
+  currentTemperature.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function showTempCelsius(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let currentTemperature = document.querySelector("#current-temperature");
+  currentTemperature.innerHTML = Math.round(celsiusTemp);
+}
+
+let celsiusTemp = null;
+
 let searchEngine = document.querySelector("#search-engine");
 searchEngine.addEventListener("submit", submitForm);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-temp");
+fahrenheitLink.addEventListener("click", showTempFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-temp");
+celsiusLink.addEventListener("click", showTempCelsius);
