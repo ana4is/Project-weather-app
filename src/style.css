@@ -64,3 +64,7 @@ ul {
   font-weight: 400;
   margin-bottom: 40px;
 }
+.forecast-weather {
+  text-align: center;
+  margin-left: 35px;
+}
