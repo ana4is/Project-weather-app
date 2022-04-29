@@ -60,6 +60,30 @@ function displayWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
 }
+
+function displayForecastWeather() {
+  let forecastWeather = document.querySelector("#forecast-weather");
+  let forecastWeatherHTML = `<div class="row">`;
+  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  days.forEach(function (day) {
+    forecastWeatherHTML =
+      forecastWeatherHTML +
+      `<div class="col-2">
+                <div class="forecast-day"><strong>${day}</strong></div>
+                <img
+                  src="http://openweathermap.org/img/wn/10d@2x.png"
+                  alt="icon"
+                  width="50"
+                  id="forecast-icon"
+                />
+                <div><span>20</span>º/<span>10</span>º</div>
+              </div>`;
+  });
+  forecastWeatherHTML = forecastWeatherHTML + `</div>`;
+  forecastWeather.innerHTML = forecastWeatherHTML;
+}
+displayForecastWeather();
+
 function search(city) {
   let apiKey = "997f30ea63c7989ff9ae71ea98d23fea";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
