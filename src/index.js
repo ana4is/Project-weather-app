@@ -38,6 +38,21 @@ function currentDate() {
 }
 currentDate();
 
+function forecastFormatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  return days[day];
+}
+
 function displayWeather(response) {
   let city = document.querySelector("#city");
   city.innerHTML = response.data.name;
@@ -59,30 +74,46 @@ function displayWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  getForecastWeather(response.data.coord);
 }
 
-function displayForecastWeather() {
+function displayForecastWeather(response) {
+  let forecast = response.data.daily;
   let forecastWeather = document.querySelector("#forecast-weather");
   let forecastWeatherHTML = `<div class="row">`;
-  let days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-  days.forEach(function (day) {
-    forecastWeatherHTML =
-      forecastWeatherHTML +
-      `<div class="col-2">
-                <div class="forecast-day"><strong>${day}</strong></div>
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      forecastWeatherHTML =
+        forecastWeatherHTML +
+        `<div class="col-2">
+                <div class="forecast-day"><strong>${forecastFormatDay(
+                  forecastDay.dt
+                )}</strong></div>
                 <img
-                  src="http://openweathermap.org/img/wn/10d@2x.png"
+                  src="http://openweathermap.org/img/wn/${
+                    forecastDay.weather[0].icon
+                  }@2x.png"
                   alt="icon"
                   width="50"
                   id="forecast-icon"
                 />
-                <div><span>20</span>º/<span>10</span>º</div>
+                <div><span>${Math.round(
+                  forecastDay.temp.max
+                )}</span>º/<span>${Math.round(
+          forecastDay.temp.min
+        )}</span>º</div>
               </div>`;
+    }
   });
   forecastWeatherHTML = forecastWeatherHTML + `</div>`;
   forecastWeather.innerHTML = forecastWeatherHTML;
 }
-displayForecastWeather();
+
+function getForecastWeather(coordinates) {
+  let apiKey = "997f30ea63c7989ff9ae71ea98d23fea";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecastWeather);
+}
 
 function search(city) {
   let apiKey = "997f30ea63c7989ff9ae71ea98d23fea";
@@ -111,6 +142,8 @@ function showTempCelsius(event) {
   let currentTemperature = document.querySelector("#current-temperature");
   currentTemperature.innerHTML = Math.round(celsiusTemp);
 }
+
+search("sevilla");
 
 let celsiusTemp = null;
 
